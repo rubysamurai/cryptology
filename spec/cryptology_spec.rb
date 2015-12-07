@@ -37,6 +37,13 @@ ALGORITHMS = %w(AES-128-CBC
                 SEED-CBC)
 
 describe Cryptology do
+  it 'encrypts and decrypts with default arguments' do
+    data      = 'Very confidential data with UTF-8 symbols: ♠ я ü æ'
+    key       = 'veryLongAndSecurePassword_6154309'
+    encrypted = Cryptology.encrypt(data, key)
+    expect(Cryptology.decrypt(encrypted, key)).to eq data
+  end
+
   context 'encryption' do
     ALGORITHMS.each do |alg|
       it "encrypts #{alg}" do

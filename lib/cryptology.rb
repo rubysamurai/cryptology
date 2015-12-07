@@ -20,7 +20,7 @@ module Cryptology
       cipher = ::OpenSSL::Cipher::Cipher.new(algorithm)
       cipher.encrypt
       cipher.key = key
-      cipher.iv = iv
+      cipher.iv = iv unless iv.nil?
       cipher.update(data) + cipher.final
     end
 
@@ -28,7 +28,7 @@ module Cryptology
       decipher = ::OpenSSL::Cipher::Cipher.new(algorithm)
       decipher.decrypt
       decipher.key = key
-      decipher.iv = iv
+      decipher.iv = iv unless iv.nil?
       decipher.update(encrypted_data) + decipher.final
     end
 
