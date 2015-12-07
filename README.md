@@ -54,7 +54,7 @@ iv = OpenSSL::Cipher::Cipher.new(algorithm).random_iv
 encrypted = Cryptology.encrypt(data, key, algorithm, iv)
 
 # Decrypt our data
-plain = Cryptology.decrypt(data, key, algorithm, iv)
+plain = Cryptology.decrypt(encrypted, key, algorithm, iv)
 
 ```
 
