@@ -13,9 +13,9 @@ Add this line to your application's Gemfile:
 gem 'cryptology'
 ```
 
-Save `Gemfile` and execute `bundle` command to install the gem.
+Save `Gemfile` and execute `$ bundle` command to install the gem.
 
-Or to install it yourself run this command: 
+Or to install it yourself run this command:
 
 ```
 $ gem install cryptology
@@ -46,7 +46,7 @@ data = 'Very, very confidential data'
 # Secure key for encryption (required)
 key = 'veryLongAndSecurePassword_6154309'
 # Use Blowfish cipher in CBC mode (optional)
-cipher  = 'BF-CBC'
+cipher = 'BF-CBC'
 # Initialization vector for BF-CBC (optional)
 iv = OpenSSL::Cipher::Cipher.new(cipher).random_iv
 
