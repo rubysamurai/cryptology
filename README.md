@@ -29,7 +29,11 @@ Cryptology.encrypt(data: data, key: key, cipher: cipher, iv: iv)
 
 # Decrypting
 Cryptology.decrypt(data: data, key: key, cipher: cipher, iv: iv)
+
+# Check decryption ability (true if can be decrypted, false otherwise)
+Cryptology.decryptable?(data: data, key: key, cipher: cipher, iv: iv)
 ```
+
 
 Argument | Required? | Default       | Comment
 ---------|-----------|---------------|-------------
@@ -53,9 +57,12 @@ iv = OpenSSL::Cipher::Cipher.new(cipher).random_iv
 # Encrypt our data
 encrypted = Cryptology.encrypt(data: data, key: key, cipher: cipher, iv: iv)
 
+# Verify that data can be decrypted
+Cryptology.decryptable?(data: encrypted, key: key, cipher: cipher, iv: iv)
+#  => true
+
 # Decrypt our data
 plain = Cryptology.decrypt(data: encrypted, key: key, cipher: cipher, iv: iv)
-
 ```
 
 ### Cipher algorithms
