@@ -77,6 +77,26 @@ describe Cryptology do
       .to raise_error(ArgumentError, 'missing keyword: key')
   end
 
+  context '#decryptable?' do
+    it 'returns true for valid arguments' do
+      data      = 'Very confidential data with UTF-8 symbols: ♠ я ü æ'
+      key       = 'veryLongAndSecurePassword_6154309'
+      iv        = OpenSSL::Cipher::Cipher.new('AES-256-CBC').random_iv
+      encrypted = Cryptology.encrypt(data: data, key: key, iv: iv)
+      expect(Cryptology.decryptable?(data: encrypted, key: key, iv: iv))
+        .to be true
+    end
+
+    it 'returns false for invalid arguments' do
+      data      = 'Very confidential data with UTF-8 symbols: ♠ я ü æ'
+      key       = 'veryLongAndSecurePassword_6154309'
+      iv        = OpenSSL::Cipher::Cipher.new('AES-256-CBC').random_iv
+      encrypted = Cryptology.encrypt(data: data, key: key, iv: iv)
+      expect(Cryptology.decryptable?(data: encrypted, key: 'invalid', iv: iv))
+        .to be false
+    end
+  end
+
   context 'encryption' do
     CIPHERS.each do |c|
       it "encrypts #{c}" do

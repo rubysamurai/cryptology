@@ -14,6 +14,12 @@ module Cryptology
       .force_encoding('UTF-8').encode
   end
 
+  def self.decryptable?(data:, key:, cipher: 'AES-256-CBC', iv: nil)
+    return true if decrypt(data: data, key: key, cipher: cipher, iv: iv)
+  rescue OpenSSL::Cipher::CipherError
+    return false
+  end
+
   private
 
     def self.encrypt_data(data, key, cipher, iv)
