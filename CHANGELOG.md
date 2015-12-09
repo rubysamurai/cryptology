@@ -1,3 +1,7 @@
+## 1.2.0 (2015-12-10)
+
+- Improvement: Add decryptable? helper method
+
 ## 1.1.0 (2015-12-08)
 
 - Improvement: Switch to keyword arguments
