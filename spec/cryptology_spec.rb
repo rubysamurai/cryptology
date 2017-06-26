@@ -1,20 +1,6 @@
 require 'spec_helper'
 
-CIPHERS = %w[AES-128-CBC
-             AES-128-CFB
-             AES-128-CFB1
-             AES-128-CFB8
-             AES-128-ECB
-             AES-128-OFB
-
-             AES-192-CBC
-             AES-192-CFB
-             AES-192-CFB1
-             AES-192-CFB8
-             AES-192-ECB
-             AES-192-OFB
-
-             AES-256-CBC
+CIPHERS = %w[AES-256-CBC
              AES-256-CFB
              AES-256-CFB1
              AES-256-CFB8
@@ -22,31 +8,24 @@ CIPHERS = %w[AES-128-CBC
              AES-256-ECB
              AES-256-OFB
 
-             BF-CBC
-             BF-CFB
-             BF-ECB
-             BF-OFB
-
              CAMELLIA-256-CBC
-             CAST5-CBC
-             DES-CBC
-             DES-EDE-CBC
-             DES-EDE3-CBC
-             DESX-CBC
-             RC2-CBC
-             SEED-CBC].freeze
+             CAMELLIA-256-CFB
+             CAMELLIA-256-CFB1
+             CAMELLIA-256-CFB8
+             CAMELLIA-256-ECB
+             CAMELLIA-256-OFB].freeze
 
 describe Cryptology do
   it 'encrypts and decrypts with default arguments' do
     data      = 'Very confidential data with UTF-8 symbols: ♠ я ü æ'
-    key       = 'veryLongAndSecurePassword_615430'
+    key       = 'veryLongAndSecurePassword_61543054534'
     encrypted = Cryptology.encrypt(data: data, key: key)
     expect(Cryptology.decrypt(data: encrypted, key: key)).to eq data
   end
 
   it 'encrypts and decrypts with iv argument' do
     data      = 'Very confidential data with UTF-8 symbols: ♠ я ü æ'
-    key       = 'veryLongAndSecurePassword_615430'
+    key       = 'veryLongAndSecurePassword_61543054534'
     iv        = OpenSSL::Cipher.new('AES-256-CBC').random_iv
     encrypted = Cryptology.encrypt(data: data, key: key, iv: iv)
     expect(Cryptology.decrypt(data: encrypted, key: key, iv: iv)).to eq data
@@ -54,15 +33,15 @@ describe Cryptology do
 
   it 'encrypts and decrypts with cipher argument' do
     data      = 'Very confidential data with UTF-8 symbols: ♠ я ü æ'
-    key       = '16bytespwdforBFC'
-    cipher    = 'BF-CBC'
+    key       = 'veryLongAndSecurePassword_61543054534'
+    cipher    = 'CAMELLIA-256-CBC'
     encrypted = Cryptology.encrypt(data: data, key: key, cipher: cipher)
     expect(Cryptology.decrypt(data: encrypted, key: key, cipher: cipher))
       .to eq data
   end
 
   it 'throws error without data argument' do
-    key    = 'veryLongAndSecurePassword_615430'
+    key    = 'veryLongAndSecurePassword_61543054534'
     cipher = 'AES-256-CBC'
     iv     = OpenSSL::Cipher.new('AES-256-CBC').random_iv
     expect { Cryptology.encrypt(key: key, cipher: cipher, iv: iv) }
@@ -80,7 +59,7 @@ describe Cryptology do
   context '#decryptable?' do
     it 'returns true for valid arguments' do
       data      = 'Very confidential data with UTF-8 symbols: ♠ я ü æ'
-      key       = 'veryLongAndSecurePassword_615430'
+      key       = 'veryLongAndSecurePassword_61543054534'
       iv        = OpenSSL::Cipher.new('AES-256-CBC').random_iv
       encrypted = Cryptology.encrypt(data: data, key: key, iv: iv)
       expect(Cryptology.decryptable?(data: encrypted, key: key, iv: iv))

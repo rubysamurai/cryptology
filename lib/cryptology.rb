@@ -4,13 +4,13 @@ require 'base64'
 
 module Cryptology
   def self.encrypt(data:, key:, cipher: 'AES-256-CBC', iv: nil)
-    encrypted = encrypt_data(data.to_s, key, cipher, iv)
+    encrypted = encrypt_data(data.to_s, digest(key), cipher, iv)
     ::Base64.encode64(encrypted)
   end
 
   def self.decrypt(data:, key:, cipher: 'AES-256-CBC', iv: nil)
     base64_decoded = ::Base64.decode64(data.to_s)
-    decrypt_data(base64_decoded, key, cipher, iv)
+    decrypt_data(base64_decoded, digest(key), cipher, iv)
       .force_encoding('UTF-8').encode
   end
 
@@ -36,5 +36,9 @@ module Cryptology
     decipher.update(data) + decipher.final
   end
 
-  private_class_method :encrypt_data, :decrypt_data
+  def self.digest(key)
+    ::OpenSSL::Digest::SHA256.digest(key)
+  end
+
+  private_class_method :encrypt_data, :decrypt_data, :digest
 end
