@@ -92,7 +92,7 @@ describe Cryptology do
       key       = 'veryLongAndSecurePassword_615430'
       iv        = OpenSSL::Cipher.new('AES-256-CBC').random_iv
       encrypted = Cryptology.encrypt(data: data, key: key, iv: iv)
-      expect(Cryptology.decryptable?(data: encrypted, key: 'veryLongAndSecurePassword_615431', iv: iv))
+      expect(Cryptology.decryptable?(data: encrypted, key: 'a' * 32, iv: iv))
         .to be false
     end
   end
@@ -116,9 +116,8 @@ describe Cryptology do
         key       = OpenSSL::Cipher.new(c).random_key
         iv        = OpenSSL::Cipher.new(c).random_iv
         encrypted = Cryptology.encrypt(data: data, key: key, cipher: c, iv: iv)
-        expect(
-          Cryptology.decrypt(data: encrypted, key: key, cipher: c, iv: iv)
-        ).to eq data
+        expect(Cryptology.decrypt(data: encrypted, key: key, cipher: c, iv: iv))
+          .to eq data
       end
     end
   end
