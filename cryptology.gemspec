@@ -10,18 +10,18 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Dmitriy Tarasov']
   spec.email         = ['info@rubysamurai.com']
 
-  spec.summary       = 'Wrapper for symmetric encryption and decryption using any algorithm supported by OpenSSL'
-  spec.description   = 'Wrapper for symmetric encryption and decryption using any algorithm supported by OpenSSL'
+  spec.summary       = 'Symmetric encryption and decryption with OpenSSL'
+  spec.description   = 'Symmetric encryption and decryption with OpenSSL'
   spec.homepage      = 'https://github.com/rubysamurai/cryptology'
   spec.license       = 'MIT'
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(spec|features)/}) }
   spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
   spec.required_ruby_version = '>= 2.1.0'
 
-  spec.add_development_dependency 'rake',  '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.3'
+  spec.add_development_dependency 'rake',  '>= 12.0'
+  spec.add_development_dependency 'rspec', '>= 3.6'
 end
