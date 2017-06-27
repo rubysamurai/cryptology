@@ -102,23 +102,12 @@ plain = Cryptology.decrypt(data: enc['data'],
 
 ### Cipher algorithms
 
-To get a list of available cipher algorithms in your environment run this command:
-
-```
-$ openssl list-cipher-algorithms
-```
-
-or this Ruby code:
-
-```ruby
-require 'openssl'
-puts OpenSSL::Cipher.ciphers
-```
+> **Note:** Ruby 2.4 and above would throw an error if key is too short or too long for a given algorithm (see [this commit](https://github.com/ruby/ruby/commit/ce635262f53b760284d56bb1027baebaaec175d1) for details) If you want to use this gem with Ruby 2.4+ make sure you choose algorithm with 32 bytes size key.
 
 List of tested and supported ciphers:
 
 ```
-OpenSSL 1.0.1e
+Ruby 2.4.1, OpenSSL 1.0.1e
 
 AES-256-CBC
 AES-256-CFB
