@@ -19,6 +19,7 @@ describe Cryptology do
   let(:data) { 'Very confidential data with UTF-8 symbols: ♠ я ü æ' }
   let(:key) { 'veryLongAndSecurePassword_61543054534' }
   let(:salt) { OpenSSL::Random.random_bytes(16) }
+  let(:iter) { 25_000 }
   let(:cipher) { 'CAMELLIA-256-CBC' }
   let(:iv) { OpenSSL::Cipher.new(cipher).random_iv }
 
@@ -39,6 +40,18 @@ describe Cryptology do
       Cryptology.decrypt(data: encrypted['data'],
                          key: key,
                          salt: salt,
+                         iv: encrypted['iv'])
+    ).to eq data
+  end
+
+  it 'encrypts and decrypts with iter argument' do
+    encrypted = Cryptology.encrypt(data: data, key: key, iter: iter)
+    expect(encrypted['iter']).to eq iter
+    expect(
+      Cryptology.decrypt(data: encrypted['data'],
+                         key: key,
+                         salt: encrypted['salt'],
+                         iter: iter,
                          iv: encrypted['iv'])
     ).to eq data
   end
@@ -103,13 +116,14 @@ describe Cryptology do
   end
 
   context '#decryptable?' do
-    let(:encrypted) { Cryptology.encrypt(data: data, key: key, salt: salt, cipher: cipher, iv: iv) }
+    let(:encrypted) { Cryptology.encrypt(data: data, key: key, salt: salt, iter: iter, cipher: cipher, iv: iv) }
 
     it 'returns true for valid arguments' do
       expect(
         Cryptology.decryptable?(data: encrypted['data'],
                                 key: key,
                                 salt: salt,
+                                iter: iter,
                                 cipher: cipher,
                                 iv: iv)
       ).to be true
@@ -120,6 +134,7 @@ describe Cryptology do
         Cryptology.decryptable?(data: 'random',
                                 key: key,
                                 salt: salt,
+                                iter: iter,
                                 cipher: cipher,
                                 iv: iv)
       ).to be false
@@ -130,6 +145,7 @@ describe Cryptology do
         Cryptology.decryptable?(data: encrypted['data'],
                                 key: key.upcase,
                                 salt: salt,
+                                iter: iter,
                                 cipher: cipher,
                                 iv: iv)
       ).to be false
@@ -140,6 +156,18 @@ describe Cryptology do
         Cryptology.decryptable?(data: encrypted['data'],
                                 key: key,
                                 salt: 'invalid',
+                                iter: iter,
+                                cipher: cipher,
+                                iv: iv)
+      ).to be false
+    end
+
+    it 'returns false for invalid iter argument' do
+      expect(
+        Cryptology.decryptable?(data: encrypted['data'],
+                                key: key,
+                                salt: salt,
+                                iter: iter - 1,
                                 cipher: cipher,
                                 iv: iv)
       ).to be false
@@ -150,6 +178,7 @@ describe Cryptology do
         Cryptology.decryptable?(data: encrypted['data'],
                                 key: key,
                                 salt: salt,
+                                iter: iter,
                                 cipher: 'AES-256-CBC',
                                 iv: iv)
       ).to be false
@@ -161,8 +190,7 @@ describe Cryptology do
       it "encrypts #{c}" do
         data = 'Very, very confidential data'
         key  = OpenSSL::Cipher.new(c).random_key
-        iv   = OpenSSL::Cipher.new(c).random_iv
-        expect { Cryptology.encrypt(data: data, key: key, cipher: c, iv: iv) }
+        expect { Cryptology.encrypt(data: data, key: key, cipher: c) }
           .not_to raise_error
       end
     end
@@ -173,14 +201,14 @@ describe Cryptology do
       it "decrypts #{c}" do
         data      = 'Very confidential data with UTF-8 symbols: ♠ я ü æ'
         key       = OpenSSL::Cipher.new(c).random_key
-        iv        = OpenSSL::Cipher.new(c).random_iv
-        encrypted = Cryptology.encrypt(data: data, key: key, cipher: c, iv: iv)
+        encrypted = Cryptology.encrypt(data: data, key: key, cipher: c)
         expect(
           Cryptology.decrypt(data: encrypted['data'],
                              key: key,
                              salt: encrypted['salt'],
+                             iter: encrypted['iter'],
                              cipher: c,
-                             iv: iv)
+                             iv: encrypted['iv'])
         ).to eq data
       end
     end
