@@ -1,0 +1,17 @@
+AllCops:
+  TargetRubyVersion: 2.4
+
+Metrics/BlockLength:
+  ExcludedMethods: RSpec.describe, context
+
+Metrics/LineLength:
+  Max: 100
+
+Metrics/ParameterLists:
+  Max: 6
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false

@@ -15,7 +15,7 @@ CIPHERS = %w[AES-256-CBC
              CAMELLIA-256-ECB
              CAMELLIA-256-OFB].freeze
 
-describe Cryptology do
+RSpec.describe Cryptology do
   let(:data) { 'Very confidential data with UTF-8 symbols: ♠ я ü æ' }
   let(:key) { 'veryLongAndSecurePassword_61543054534' }
   let(:salt) { OpenSSL::Random.random_bytes(16) }
@@ -116,7 +116,9 @@ describe Cryptology do
   end
 
   context '#decryptable?' do
-    let(:encrypted) { Cryptology.encrypt(data: data, key: key, salt: salt, iter: iter, cipher: cipher, iv: iv) }
+    let(:encrypted) do
+      Cryptology.encrypt(data: data, key: key, salt: salt, iter: iter, cipher: cipher, iv: iv)
+    end
 
     it 'returns true for valid arguments' do
       expect(
@@ -190,8 +192,7 @@ describe Cryptology do
       it "encrypts #{c}" do
         data = 'Very, very confidential data'
         key  = OpenSSL::Cipher.new(c).random_key
-        expect { Cryptology.encrypt(data: data, key: key, cipher: c) }
-          .not_to raise_error
+        expect { Cryptology.encrypt(data: data, key: key, cipher: c) }.not_to raise_error
       end
     end
   end
