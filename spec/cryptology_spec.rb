@@ -82,12 +82,12 @@ RSpec.describe Cryptology do
   context '#encrypt' do
     it 'throws error without data argument' do
       expect { Cryptology.encrypt(key: key) }
-        .to raise_error(ArgumentError, 'missing keyword: data')
+        .to raise_error(ArgumentError)
     end
 
     it 'throws error without key argument' do
       expect { Cryptology.encrypt(data: data) }
-        .to raise_error(ArgumentError, 'missing keyword: key')
+        .to raise_error(ArgumentError)
     end
   end
 
@@ -96,22 +96,22 @@ RSpec.describe Cryptology do
 
     it 'throws error without data argument' do
       expect { Cryptology.decrypt(key: key, salt: salt, iv: iv) }
-        .to raise_error(ArgumentError, 'missing keyword: data')
+        .to raise_error(ArgumentError)
     end
 
     it 'throws error without key argument' do
       expect { Cryptology.decrypt(data: encrypted, salt: salt, iv: iv) }
-        .to raise_error(ArgumentError, 'missing keyword: key')
+        .to raise_error(ArgumentError)
     end
 
     it 'throws error without salt argument' do
       expect { Cryptology.decrypt(data: encrypted, key: key, iv: iv) }
-        .to raise_error(ArgumentError, 'missing keyword: salt')
+        .to raise_error(ArgumentError)
     end
 
     it 'throws error without iv argument' do
       expect { Cryptology.decrypt(data: encrypted, key: key, salt: salt) }
-        .to raise_error(ArgumentError, 'missing keyword: iv')
+        .to raise_error(ArgumentError)
     end
   end
 
