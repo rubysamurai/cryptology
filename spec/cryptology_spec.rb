@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 CIPHERS = %w[AES-256-CBC
              AES-256-CFB
              AES-256-CFB1
