@@ -23,7 +23,7 @@ module Cryptology
   def self.decryptable?(data:, key:, salt:, iter: 10_000, cipher: 'AES-256-CBC', iv:)
     return true if decrypt(data: data, key: key, salt: salt, iter: iter, cipher: cipher, iv: iv)
   rescue OpenSSL::Cipher::CipherError
-    return false
+    false
   end
 
   def self.encrypt_data(data, key, cipher, iv)
