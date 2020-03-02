@@ -1,7 +1,7 @@
 # Cryptology
 
 [![Gem Version](https://badge.fury.io/rb/cryptology.svg)](https://badge.fury.io/rb/cryptology)
-[![Build Status](https://travis-ci.org/rubysamurai/cryptology.svg?branch=master)](https://travis-ci.org/rubysamurai/cryptology)
+[![Build Status](https://travis-ci.com/rubysamurai/cryptology.svg?branch=master)](https://travis-ci.com/rubysamurai/cryptology)
 
 `Cryptology` is a wrapper for encryption and decryption in Ruby using OpenSSL. By default `AES-256-CBC` cipher is used.
 
@@ -55,7 +55,7 @@ key = 'password_01X'
 
 # Salt (optional)
 salt = OpenSSL::Random.random_bytes(16)
-# => "r\x97\xEA9]I\x18\x05\xEAZ\xA2\xBB^Y=\x83" 
+# => "r\x97\xEA9]I\x18\x05\xEAZ\xA2\xBB^Y=\x83"
 
 # Number of iterations (optional)
 iter = 50000
@@ -68,36 +68,36 @@ iv = OpenSSL::Cipher.new(cipher).random_iv
 # => "\xB0\xCA\xBBc5'\x03i\x01\xC1@\xC0\xB6\xCE7+"
 
 # Encrypt our data
-enc = Cryptology.encrypt(data: data, 
-                         key: key, 
-                         salt: salt, 
-                         iter: iter, 
-                         cipher: cipher, 
+enc = Cryptology.encrypt(data: data,
+                         key: key,
+                         salt: salt,
+                         iter: iter,
+                         cipher: cipher,
                          iv: iv)
 
 # => { "cipher"=>"CAMELLIA-256-CBC",
 #      "salt"=>"r\x97\xEA9]I\x18\x05\xEAZ\xA2\xBB^Y=\x83",
 #      "iter"=>50000,
 #      "iv"=>"\xB0\xCA\xBBc5'\x03i\x01\xC1@\xC0\xB6\xCE7+",
-#      "data"=>"k+e3JZpkFIgkB15LjK85k5roojNgawN9yPEp6CXGhCQ=\n" } 
+#      "data"=>"k+e3JZpkFIgkB15LjK85k5roojNgawN9yPEp6CXGhCQ=\n" }
 
 # Verify that data can be decrypted
-Cryptology.decryptable?(data: enc['data'], 
-                        key: key, 
-                        salt: enc['salt'], 
-                        iter: enc['iter'], 
-                        cipher: enc['cipher'], 
+Cryptology.decryptable?(data: enc['data'],
+                        key: key,
+                        salt: enc['salt'],
+                        iter: enc['iter'],
+                        cipher: enc['cipher'],
                         iv: enc['iv'])
 #  => true
 
 # Decrypt our data
-plain = Cryptology.decrypt(data: enc['data'], 
-                           key: key, 
-                           salt: enc['salt'], 
-                           iter: enc['iter'], 
-                           cipher: enc['cipher'], 
+plain = Cryptology.decrypt(data: enc['data'],
+                           key: key,
+                           salt: enc['salt'],
+                           iter: enc['iter'],
+                           cipher: enc['cipher'],
                            iv: enc['iv'])
-# => "Very, very confidential data" 
+# => "Very, very confidential data"
 ```
 
 ### Cipher algorithms
