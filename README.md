@@ -102,27 +102,45 @@ plain = Cryptology.decrypt(data: enc['data'],
 
 ### Cipher algorithms
 
-> **Note:** Ruby 2.4 and above would throw an error if key is too short or too long for a given algorithm (see [this commit](https://github.com/ruby/ruby/commit/ce635262f53b760284d56bb1027baebaaec175d1) for details) If you want to use this gem with Ruby 2.4+ make sure you choose algorithm with 32 bytes size key.
+> **Note:** Ruby 2.4 and above would throw an error if key is too short or too long for a given cipher algorithm (see [this commit](https://github.com/ruby/ruby/commit/ce635262f53b760284d56bb1027baebaaec175d1) for details) Make sure you choose a cipher with 32 bytes size key.
 
 List of tested and supported ciphers:
 
 ```
-Ruby 2.4.1, OpenSSL 1.0.1e
+Ruby 2.7.0, OpenSSL 1.1.1
 
+AES-128-XTS
 AES-256-CBC
+AES-256-CBC-HMAC-SHA1
+AES-256-CBC-HMAC-SHA256
 AES-256-CFB
 AES-256-CFB1
 AES-256-CFB8
 AES-256-CTR
 AES-256-ECB
 AES-256-OFB
+AES256
+
+ARIA-256-CBC
+ARIA-256-CFB
+ARIA-256-CFB1
+ARIA-256-CFB8
+ARIA-256-CTR
+ARIA-256-ECB
+ARIA-256-OFB
+ARIA256
 
 CAMELLIA-256-CBC
 CAMELLIA-256-CFB
 CAMELLIA-256-CFB1
 CAMELLIA-256-CFB8
+CAMELLIA-256-CTR
 CAMELLIA-256-ECB
 CAMELLIA-256-OFB
+CAMELLIA256
+
+CHACHA20
+CHACHA20-POLY1305
 ```
 
 ## License
