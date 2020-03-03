@@ -1,3 +1,12 @@
+# [2.1.0](https://github.com/rubysamurai/cryptology/compare/v2.0.0...v2.1.0) (2020-03-04)
+
+
+### Features
+
+* Require Ruby 2.4 ([796d1a1](https://github.com/rubysamurai/cryptology/commit/796d1a1ae6e7bcbc2a0062108f8aec0ed68a6d58))
+
+
+
 # [2.0.0](https://github.com/rubysamurai/cryptology/compare/v1.2.0...v2.0.0) (2017-06-27)
 
 
