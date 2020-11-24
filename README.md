@@ -1,7 +1,7 @@
 # Cryptology
 
 [![Gem Version](https://badge.fury.io/rb/cryptology.svg)](https://badge.fury.io/rb/cryptology)
-[![Build Status](https://travis-ci.com/rubysamurai/cryptology.svg?branch=master)](https://travis-ci.com/rubysamurai/cryptology)
+[![CI](https://github.com/rubysamurai/cryptology/workflows/CI/badge.svg)](https://github.com/rubysamurai/cryptology/actions?query=workflow%3ACI)
 
 `Cryptology` is a wrapper for encryption and decryption in Ruby using OpenSSL. By default `AES-256-CBC` cipher is used.
 
