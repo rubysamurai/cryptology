@@ -102,12 +102,12 @@ plain = Cryptology.decrypt(data: enc['data'],
 
 ### Cipher algorithms
 
-> **Note:** Ruby 2.4 and above would throw an error if key is too short or too long for a given cipher algorithm (see [this commit](https://github.com/ruby/ruby/commit/ce635262f53b760284d56bb1027baebaaec175d1) for details) Make sure you choose a cipher with 32 bytes size key.
+> **Note:** Ruby 2.4 and above would throw an error if key is too short or too long for a given cipher algorithm (see [this commit](https://github.com/ruby/ruby/commit/ce635262f53b760284d56bb1027baebaaec175d1) for details). Make sure you use the proper key size for your cipher.
 
 List of tested and supported ciphers:
 
 ```
-Ruby 2.7.0, OpenSSL 1.1.1
+Ruby 3.0.2 OpenSSL 1.1.1f
 
 AES-128-XTS
 AES-256-CBC
