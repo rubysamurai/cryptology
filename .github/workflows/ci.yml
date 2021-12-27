@@ -6,7 +6,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [2.4, 2.5, 2.6, 2.7, '3.0', head, truffleruby, truffleruby-head, truffleruby+graalvm, truffleruby+graalvm-head]
+        ruby: [2.4, 2.5, 2.6, 2.7, '3.0', 3.1, head, truffleruby, truffleruby-head, truffleruby+graalvm, truffleruby+graalvm-head]
     name: Ruby ${{ matrix.ruby }}
     steps:
       - name: Checkout
