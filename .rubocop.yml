@@ -1,20 +1,21 @@
 AllCops:
   TargetRubyVersion: 2.4
+  NewCops: enable
 
-Metrics/BlockLength:
-  ExcludedMethods: [RSpec.describe, context]
-
-Metrics/LineLength:
+Layout/LineLength:
   Max: 100
 
+Metrics/BlockLength:
+  Enabled: false
+
 Metrics/ParameterLists:
-  Max: 6
+  Enabled: false
 
 Naming/MethodParameterName:
-  MinNameLength: 2
+  Enabled: false
 
 Style/Documentation:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
-  EnforcedStyle: never
+  Enabled: false
