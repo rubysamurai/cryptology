@@ -107,12 +107,10 @@ plain = Cryptology.decrypt(data: enc['data'],
 List of tested and supported ciphers:
 
 ```
-Ruby 3.0.2 OpenSSL 1.1.1f
+Ruby 3.3.0, OpenSSL 3.1.1
 
 AES-128-XTS
 AES-256-CBC
-AES-256-CBC-HMAC-SHA1
-AES-256-CBC-HMAC-SHA256
 AES-256-CFB
 AES-256-CFB1
 AES-256-CFB8
