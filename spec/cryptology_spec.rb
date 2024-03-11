@@ -1,7 +1,5 @@
 CIPHERS = %w[AES-128-XTS
              AES-256-CBC
-             AES-256-CBC-HMAC-SHA1
-             AES-256-CBC-HMAC-SHA256
              AES-256-CFB
              AES-256-CFB1
              AES-256-CFB8
