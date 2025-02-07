@@ -30,7 +30,7 @@ module Cryptology
     c = OpenSSL::Cipher.new(cipher)
     c.encrypt
     c.key = key
-    c.iv  = iv unless iv.length != c.random_iv.length
+    c.iv = iv if iv.length == c.iv_len
     c.update(data) + c.final
   end
 
@@ -38,7 +38,7 @@ module Cryptology
     decipher = OpenSSL::Cipher.new(cipher)
     decipher.decrypt
     decipher.key = key
-    decipher.iv  = iv unless iv.length != decipher.random_iv.length
+    decipher.iv  = iv if iv.length == decipher.iv_len
     decipher.update(data) + decipher.final
   end
 
